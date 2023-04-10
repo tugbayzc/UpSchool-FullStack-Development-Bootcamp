@@ -16,7 +16,6 @@ namespace Application.Features.Cities.Commands.Add
             _applicationDbContext = applicationDbContext;
         }
         
-        
 
         public async Task<Response<int>> Handle(CityAddCommand request, CancellationToken cancellationToken)
         {

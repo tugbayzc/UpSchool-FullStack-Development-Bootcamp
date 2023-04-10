@@ -1,6 +1,9 @@
 using Application.Common.Interfaces;
 using Domain.Common;
+using Domain.Entities;
+using Domain.Identity;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Addresses.Commands.Add;
 
@@ -15,10 +18,11 @@ public class AddressAddCommandHandler:IRequestHandler<AddressAddCommand,Response
 
     public async Task<Response<int>> Handle(AddressAddCommand request, CancellationToken cancellationToken)
     {
-        var address = new Domain.Entities.Address()
+        
+        var address = new Address()
         {
             Name = request.Name,
-            UserId=request.UserId,
+            UserId= request.UserId,
             CountryId = request.CountryId,
             CityId= request.CityId,
             District=request.District,
@@ -27,7 +31,7 @@ public class AddressAddCommandHandler:IRequestHandler<AddressAddCommand,Response
             AddressLine2=request.AddressLine2,
             AddressType=request.AddressType,
             CreatedOn=DateTimeOffset.Now,
-            CreatedByUserId=null,
+            CreatedByUserId=request.UserId.ToString(),
             IsDeleted=false,
         };
 

@@ -10,7 +10,7 @@ namespace WebApi.Controllers;
 
 public class AddressesController:ApiControllerBase 
 {
-    [HttpPost]
+    [HttpPost("Add")]
     public async Task<IActionResult> AddAddressesAsync(AddressAddCommand command)
     {
         return Ok(await Mediator.Send(command));
@@ -22,7 +22,7 @@ public class AddressesController:ApiControllerBase
         return Ok(await Mediator.Send(query));
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
         return Ok(await Mediator.Send(new AddressGetByIdQuery { Id = id }));
@@ -34,7 +34,7 @@ public class AddressesController:ApiControllerBase
         return Ok(Mediator.Send(new AddressUpdateCommand { Id = id }));
     }
     
-    [HttpDelete]
+    [HttpDelete("SoftDelete")]
     public async Task<IActionResult> DeleteByIdAsync(int id)
     {
         return Ok(Mediator.Send(new AddressDeleteCommand{Id = id}));
