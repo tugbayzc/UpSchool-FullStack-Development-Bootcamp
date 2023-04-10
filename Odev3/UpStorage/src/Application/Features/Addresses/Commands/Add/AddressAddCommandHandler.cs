@@ -18,17 +18,17 @@ public class AddressAddCommandHandler:IRequestHandler<AddressAddCommand,Response
         var address = new Domain.Entities.Address()
         {
             Name = request.Name,
+            UserId=request.UserId,
             CountryId = request.CountryId,
-            UserId = request.UserId,
-            CityId = request.CityId,
-            District = request.District,
-            PostCode = request.PostCode,
-            AddressLine1 = request.AddressLine1,
-            AddressLine2 = request.AddressLine2,
-            AddressType = request.AddressType,
-            CreatedOn = DateTimeOffset.Now,
-            CreatedByUserId = null,
-            IsDeleted = false
+            CityId= request.CityId,
+            District=request.District,
+            PostCode=request.PostCode,
+            AddressLine1=request.AddressLine1,
+            AddressLine2=request.AddressLine2,
+            AddressType=request.AddressType,
+            CreatedOn=DateTimeOffset.Now,
+            CreatedByUserId=null,
+            IsDeleted=false,
         };
 
         await _applicationDbContext.Addresses.AddAsync(address, cancellationToken);

@@ -7,7 +7,6 @@ public class AddressGetAllDto
     public int Id { get; set; }
     public string Name { get; set; }
     public int UserId { get; set; }
-    public string UserFullName { get; set; }
 
     public int CountryId { get; set; }
     public string CountryName { get; set; }
@@ -22,5 +21,6 @@ public class AddressGetAllDto
     public string? AddressLine2 { get; set; }
 
     public bool IsDeleted { get; set; }
+    
     public AddressType AddressType { get; set; }
 }

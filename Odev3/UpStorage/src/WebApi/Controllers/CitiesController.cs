@@ -7,7 +7,6 @@ namespace WebApi.Controllers
     public class CitiesController : ApiControllerBase
     {
         [HttpPost]
-        
         public async Task<IActionResult> AddAsync(CityAddCommand command)
         {
             return Ok(await Mediator.Send(command));

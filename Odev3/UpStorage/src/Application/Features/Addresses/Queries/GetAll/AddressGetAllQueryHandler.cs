@@ -13,20 +13,19 @@ public class AddressGetAllQueryHandler:IRequestHandler<AddressGetAllQuery, List<
         _applicationDbContext = applicationDbContext;
     }
 
-    public async Task<List<AddressGetAllDto>> Handle(AddressGetAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<AddressGetAllDto>> Handle(AddressGetAllQuery query, CancellationToken cancellationToken)
     {
         var addressQuery = _applicationDbContext.Addresses.AsQueryable();
-        addressQuery = addressQuery.Where(x => x.UserId == request.UserId);
+        
+        addressQuery = addressQuery.Where(x => x.UserId==query.UserId);
 
-        addressQuery = addressQuery.Include(x => x.User);
         addressQuery = addressQuery.Include(x => x.City);
-
         addressQuery = addressQuery.Include(x => x.Country);
         
         
-        if (request.IsDeleted.HasValue)
+        if (query.IsDeleted.HasValue)
         {
-            addressQuery=addressQuery.Where(x => x.IsDeleted == request.IsDeleted.Value);
+            addressQuery=addressQuery.Where(x => x.IsDeleted == query.IsDeleted.Value);
         }
 
         var addresses = await addressQuery.ToListAsync(cancellationToken);
@@ -47,18 +46,17 @@ public class AddressGetAllQueryHandler:IRequestHandler<AddressGetAllQuery, List<
             {
                 Id = address.Id,
                 UserId= address.UserId,
-                UserFullName = new string($"{address.User.FirstName}"+" "+"{address.User.LastName}"),
                 Name = address.Name,
                 CountryId = address.CountryId,
                 CountryName = address.Country.Name,
                 CityId= address.CityId,
-                CityName= address.City.Name,
+                CityName = address.City.Name,
                 District = address.District,
                 PostCode= address.PostCode,
                 AddressLine1 = address.AddressLine1,
                 AddressLine2 = address.AddressLine2,
                 IsDeleted = address.IsDeleted,
-                   
+                AddressType = address.AddressType
             };
         }
     }

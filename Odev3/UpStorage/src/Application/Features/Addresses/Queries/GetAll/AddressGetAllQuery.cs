@@ -10,6 +10,7 @@ public class AddressGetAllQuery:IRequest<List<AddressGetAllDto>>
     public AddressGetAllQuery(int userId, bool? isIsDeleted)
     {
         UserId = userId;
+        
         IsDeleted = isIsDeleted;
     }
 }

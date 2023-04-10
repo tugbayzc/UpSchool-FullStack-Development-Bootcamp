@@ -1,6 +1,9 @@
-namespace Application.Features.Address.Queries.GetById;
+using Domain.Common;
+using MediatR;
 
-public class AddressGetByIdQuery
+namespace Application.Features.Addresses.Queries.GetById;
+
+public class AddressGetByIdQuery:IRequest<AddressGetByIdDto>
 {
-    
+    public int Id { get; set; }
 }
