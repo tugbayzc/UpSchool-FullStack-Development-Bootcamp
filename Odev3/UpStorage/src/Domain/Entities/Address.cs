@@ -1,12 +1,14 @@
 using Domain.Common;
 using Domain.Enums;
+using Domain.Identity;
 
 namespace Domain.Entities;
 
 public class Address:EntityBase<int>
 {
     public string Name { get; set; }
-    public string UserId { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
 
     public int CountryId { get; set; }
     public Country Country { get; set; }

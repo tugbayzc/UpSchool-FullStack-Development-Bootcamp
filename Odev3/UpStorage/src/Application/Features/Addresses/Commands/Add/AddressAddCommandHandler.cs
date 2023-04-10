@@ -32,6 +32,7 @@ public class AddressAddCommandHandler:IRequestHandler<AddressAddCommand,Response
         };
 
         await _applicationDbContext.Addresses.AddAsync(address, cancellationToken);
+        
         await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
         return new Response<int>($"The new address named {address.Name} was added successfully. ");

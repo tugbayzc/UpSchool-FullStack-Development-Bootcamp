@@ -1,6 +1,15 @@
-namespace Application.Features.Address.Queries.GetAll;
+using MediatR;
 
-public class AddressGetAllQuery
+namespace Application.Features.Addresses.Queries.GetAll;
+
+public class AddressGetAllQuery:IRequest<List<AddressGetAllDto>>
 {
-    
+    public int UserId { get; set; }
+    public bool? IsDeleted { get; set; }
+
+    public AddressGetAllQuery(int userId, bool? isIsDeleted)
+    {
+        UserId = userId;
+        IsDeleted = isIsDeleted;
+    }
 }
