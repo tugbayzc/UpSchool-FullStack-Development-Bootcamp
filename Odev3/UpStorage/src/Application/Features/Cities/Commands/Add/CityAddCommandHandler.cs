@@ -1,11 +1,10 @@
 using Application.Common.Interfaces;
 using Domain.Common;
 using Domain.Entities;
-using Domain.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Cities.Command.Add
+namespace Application.Features.Cities.Commands.Add
 {
     public class CityAddCommandHandler:IRequestHandler<CityAddCommand,Response<int>>
         //Mediator buradan anlayacak nereye gideceğini!

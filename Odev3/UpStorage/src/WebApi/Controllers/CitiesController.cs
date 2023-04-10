@@ -1,4 +1,4 @@
-using Application.Features.Cities.Command.Add;
+using Application.Features.Cities.Commands.Add;
 using Application.Features.Cities.Queries.GetAll;
 using Microsoft.AspNetCore.Mvc;
 

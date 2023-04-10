@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Domain.Common;
 using MediatR;
 
-namespace Application.Features.Cities.Command.Add;
+namespace Application.Features.Cities.Commands.Add;
 
 public class CityAddCommand:IRequest<Response<int>>
 {
