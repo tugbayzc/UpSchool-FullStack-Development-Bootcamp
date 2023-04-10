@@ -1,37 +1,27 @@
 using Domain.Entities;
-using Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations.Application;
 
-public class AddressConfiguration:IEntityTypeConfiguration<Address>
+public class NoteConfiguration:IEntityTypeConfiguration<Note>
 {
-    public void Configure(EntityTypeBuilder<Address> builder)
+    public void Configure(EntityTypeBuilder<Note> builder)
     {
-        // Id
+        //Id
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.Id);
         
-        // Name
-        builder.Property(c => c.Name).IsRequired();
-        builder.Property(c => c.Name).HasMaxLength(100);
+        //Title
+        builder.Property(x => x.Title);
+        builder.Property(x => x.Title).HasMaxLength(300);
+        builder.HasIndex(x => x.Title);
+
         
-        //District
-        builder.Property(x => x.District).IsRequired();
-        builder.Property(x => x.District).HasMaxLength(100);
-        
-        //PostCode
-        builder.Property(x => x.PostCode).IsRequired();
-        builder.Property(x => x.PostCode).HasMaxLength(100);
-        
-        //AddressLine1
-        builder.Property(x => x.AddressLine1).IsRequired();
-        builder.Property(x => x.AddressLine1).HasMaxLength(500);
-        
-        //AddressLine2
-        builder.Property(x => x.AddressLine2).HasMaxLength(500);
-        
+        //Content
+        builder.Property(x => x.Content).IsRequired();
+        builder.Property(x => x.Content).HasMaxLength(1000);
+
         // Common Fields
 
         // CreatedOn
@@ -60,16 +50,9 @@ public class AddressConfiguration:IEntityTypeConfiguration<Address>
         builder.Property(x => x.IsDeleted).HasDefaultValueSql("0");
         builder.HasIndex(x => x.IsDeleted);
         
-        
-        builder.Property(x => x.AddressType).IsRequired();
+        builder.ToTable("Notes");
 
-        builder.Property(x => x.AddressType).HasConversion<int>();//dönüşümü var mı?
-        
-        
-        //Relationships
-        builder.HasOne<User>().WithMany()
-            .HasForeignKey(x => x.UserId);
 
-        builder.ToTable("Addresses");
+
     }
 }
